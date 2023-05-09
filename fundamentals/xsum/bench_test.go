@@ -20,3 +20,13 @@ func BenchmarkThreeSumCount(b *testing.B) {
 		ThreeSumCount(a[0:])
 	}
 }
+
+func BenchmarkThreeSumCountFast(b *testing.B) {
+
+	b.ReportAllocs()
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		ThreeSumCountFast(a[0:])
+	}
+}

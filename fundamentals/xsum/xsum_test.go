@@ -47,3 +47,21 @@ func TestThreeSumCount(t *testing.T) {
 		}
 	}
 }
+
+func TestThreeSumCountFast(t *testing.T) {
+	// t.Parallel()
+
+	want := []int{70, 528, 4039}
+
+	got := []int{
+		ThreeSumCountFast(ints1k),
+		ThreeSumCountFast(ints2k),
+		ThreeSumCountFast(ints4k),
+	}
+
+	for i, v := range want {
+		if got[i] != v {
+			t.Errorf("got: %v; want: %v", got, want)
+		}
+	}
+}

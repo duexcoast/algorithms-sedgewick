@@ -18,3 +18,23 @@ func ThreeSumCount(a []int) int {
 
 	return count
 }
+
+func ThreeSumCountFast(a []int) int {
+	sorter.SortInts(a)
+
+	if containsDuplicates(a) {
+		panic("contains duplicates")
+	}
+
+	count := 0
+	n := len(a)
+
+	for i := 0; i < n; i++ {
+		for j := i + 1; j < n; j++ {
+			if k := binarySearch.Index(a, -a[i]-a[j]); k > j {
+				count++
+			}
+		}
+	}
+	return count
+}
