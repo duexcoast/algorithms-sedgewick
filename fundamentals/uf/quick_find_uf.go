@@ -1,3 +1,7 @@
+// QuickFindUF Quick-find algorithm
+// It maintains the invariant that p and q are connected if and only if
+// id[p] == id[q]. In other words, all sites in a component must have the
+// same value in id[]
 package uf
 
 type QuickFindUF struct {
@@ -45,5 +49,3 @@ func (qf *QuickFindUF) Count() int {
 func (qf *QuickFindUF) Connected(p, q int) bool {
 	return qf.Find(p) == qf.Find(q)
 }
-
-// func (qf *QuickFindUF) validate(p int) {}

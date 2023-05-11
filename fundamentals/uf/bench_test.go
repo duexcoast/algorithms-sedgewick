@@ -44,6 +44,20 @@ func benchUF(unionFind uf.UnionFind, pairs []pair) {
 		unionFind.Union(pq.p, pq.q)
 	}
 }
+func BenchmarkQuickUnionUF(b *testing.B) {
+	b.ReportAllocs()
+	if testdata == nil {
+		b.StopTimer()
+		dataInit()
+		b.StartTimer()
+	}
+
+	unionFind := uf.NewQuickUnionUF(testdata.n)
+
+	for i := 0; i < b.N; i++ {
+		benchUF(unionFind, testdata.pairs)
+	}
+}
 
 func BenchmarkQuickFindUF(b *testing.B) {
 	b.ReportAllocs()
