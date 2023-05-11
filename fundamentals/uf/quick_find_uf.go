@@ -15,21 +15,35 @@ func NewQuickFindUF(n int) *QuickFindUF {
 }
 
 func (qf *QuickFindUF) Find(p int) int {
-
-	return 0
+	return qf.id[p]
 }
 
 func (qf *QuickFindUF) Union(p, q int) {
+	// Put p and q into the same component
+	pID := qf.Find(p)
+	qID := qf.Find(q)
+
+	// if p and q are already in the same component then nothing to do
+	if pID == qID {
+		return
+	}
+
+	// Rename p's component to q's name
+	for i := 0; i < len(qf.id); i++ {
+		if qf.id[i] == pID {
+			qf.id[i] = qID
+		}
+	}
+	qf.count--
 
 }
 
 func (qf *QuickFindUF) Count() int {
-
-	return 0
+	return qf.count
 }
 
 func (qf *QuickFindUF) Connected(p, q int) bool {
-	return find(p) == find(q)
+	return qf.Find(p) == qf.Find(q)
 }
 
-func (qf *QuickFindUF) validate(p int) {}
+// func (qf *QuickFindUF) validate(p int) {}
