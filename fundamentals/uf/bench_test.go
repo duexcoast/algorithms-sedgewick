@@ -75,7 +75,6 @@ func BenchmarkQuickFindUF(b *testing.B) {
 }
 
 func BenchmarkWeightedQuickUnionUF(b *testing.B) {
-	var r
 	b.ReportAllocs()
 	if testdata == nil {
 		b.StopTimer()
