@@ -1,7 +1,4 @@
 // QuickUnionUF Quick-union algorithm
-// It maintains the invariant that p and q are connected if and only if
-// id[p] == id[q]. In other words, all sites in a component must have the
-// same value in id[]
 package uf
 
 type QuickUnionUF struct {

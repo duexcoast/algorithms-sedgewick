@@ -73,3 +73,19 @@ func BenchmarkQuickFindUF(b *testing.B) {
 		benchUF(unionFind, testdata.pairs)
 	}
 }
+
+func BenchmarkWeightedQuickUnionUF(b *testing.B) {
+	var r
+	b.ReportAllocs()
+	if testdata == nil {
+		b.StopTimer()
+		dataInit()
+		b.StartTimer()
+	}
+
+	unionFind := uf.NewWeightedQuickUnionUF(testdata.n)
+
+	for i := 0; i < b.N; i++ {
+		benchUF(unionFind, testdata.pairs)
+	}
+}
