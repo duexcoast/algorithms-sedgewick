@@ -4,8 +4,7 @@ type Sortable interface {
 	// the number of elements in the collection
 	Len() int
 
-	// Reports whether the element with index i
-	// must sort before the element with index j
+	// Returns true if x[i] < x[j]
 	Less(i, j int) bool
 
 	// Swap the elements with indexes i and j

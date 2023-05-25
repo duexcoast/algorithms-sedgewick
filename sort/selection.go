@@ -11,9 +11,8 @@ func SelectionSort(x Sortable) {
 			if x.Less(j, min) {
 				min = j
 			}
-			x.Swap(i, min)
 		}
-
+		x.Swap(i, min)
 	}
 }
 
