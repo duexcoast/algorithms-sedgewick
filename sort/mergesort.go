@@ -1,6 +1,9 @@
 package sort
 
-import "reflect"
+import (
+	"fmt"
+	"reflect"
+)
 
 // Merging: combining two ordered arrays to make one larger ordered array.
 // This opertation immeditaely lends itself to a simple recursive sort method
@@ -21,18 +24,21 @@ func Mergesort(x Sortable) {
 
 	// convert type
 	switch t {
-	case "sorting.IntSortSlice":
+	case "sort.IntSortSlice":
 		a := x.(IntSortSlice)        // convert type
 		aux := make(IntSortSlice, n) // allocate space just once
 		sortInts(a, aux, 0, n-1)     // merge sort on ints
-	case "sorting.Float64SortSlice":
+	case "sort.Float64SortSlice":
 		a := x.(Float64SortSlice)
 		aux := make(Float64SortSlice, n)
 		sortFloat64s(a, aux, 0, n-1)
-	case "sorting.StringSortSlice":
+	case "sort.StringSortSlice":
 		a := x.(StringSortSlice)
 		aux := make(StringSortSlice, n)
 		sortStrings(a, aux, 0, n-1)
+	default:
+		fmt.Println("switch case failed")
+
 	}
 }
 

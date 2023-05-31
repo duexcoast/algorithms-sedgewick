@@ -1,62 +1,62 @@
 package fundamentals
 
-type Queue[T any] struct {
-	first *node[T]
-	last  *node[T]
-	len   int
+type Queue struct {
+	first *Node
+	last  *Node
+	n     int
 }
 
-func NewQueue[T any]() *Queue[T] {
-	return &Queue[T]{}
+func NewQueue() *Queue {
+	return &Queue{}
 }
 
-func (q *Queue[T]) IsEmpty() bool {
+func (q *Queue) IsEmpty() bool {
 	return q.first == nil
 }
 
-func (q *Queue[T]) Size() int {
-	return q.len
+func (q *Queue) Size() int {
+	return q.n
 }
 
-func (q *Queue[T]) Enqueue(val T) {
+func (q *Queue) Enqueue(item Item) {
 	// add item to the end of the list
 	oldLast := q.last
-	q.last = newNode(val)
+	q.last = newNode(item, nil)
 	oldLast.next = q.last
-	q.len++
+	q.n++
 }
 
-func (q *Queue[T]) Dequeue() T {
+func (q *Queue) Dequeue() Item {
 	// remove item from the beginning of the list
-	val := q.first.val
+	item := q.first.item
 	q.first = q.first.next
 	if q.IsEmpty() {
 		q.last = nil
 	}
-	q.len--
+	q.n--
 
-	return val
+	return item
 }
 
-func (q *Queue[T]) Peek() T {
+func (q *Queue) Peek() Item {
 	if q.IsEmpty() {
 		panic("queue is empty")
 	}
 
-	return q.first.val
+	return q.first.item
 }
 
-func (q *Queue[T]) Iterator() []T {
+func (q *Queue) Iterator() Iterator {
 
-	items := make([]T, q.len)
+	items := make([]interface{}, q.n)
 
 	i := 0
 	cur := q.first
-	for i < q.len {
-		items[i] = cur.val
+	for i < q.n {
+		items[i] = cur.item
 		cur = cur.next
 		i++
 	}
-	return items
+	return Iterator(items)
 
 }

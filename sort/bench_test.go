@@ -54,3 +54,14 @@ func BenchmarkMerge(b *testing.B) {
 	}
 
 }
+func BenchmarkQuick(b *testing.B) {
+	sorter := NewQuick()
+
+	b.ReportAllocs()
+	b.ResetTimer()
+
+	for i := 0; i < b.N; i++ {
+		sorter.SortInts(a[0:])
+	}
+
+}

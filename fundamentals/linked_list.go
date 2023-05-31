@@ -1,13 +1,15 @@
 package fundamentals
 
-type node[T any] struct {
-	val  T
-	next *node[T]
+type Item interface{}
+
+type Node struct {
+	item Item
+	next *Node
 }
 
-func newNode[T any](val T) *node[T] {
-	return &node[T]{
-		val:  val,
-		next: nil,
+func newNode(item Item, next *Node) *Node {
+	return &Node{
+		item: item,
+		next: next,
 	}
 }

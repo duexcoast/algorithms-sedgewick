@@ -1,57 +1,70 @@
 package fundamentals
 
-type Stack[T any] struct {
-	top *node[T]
-	len int
+import (
+	"fmt"
+	"strings"
+)
+
+type Stack struct {
+	top *Node
+	n   int
 }
 
-func NewStack[T any]() *Stack[T] {
-	return &Stack[T]{}
+func NewStack() *Stack {
+	return &Stack{}
 }
 
-func (s *Stack[T]) IsEmpty() bool {
+func (s *Stack) IsEmpty() bool {
 	return s.top == nil
 }
 
-func (s *Stack[T]) Size() int {
-	return s.len
+func (s *Stack) Size() int {
+	return s.n
 }
 
-func (s *Stack[T]) Push(val T) {
-	oldtop := s.top
-	s.top = newNode(val)
-	s.top.next = oldtop
-	s.len++
+func (s *Stack) Push(item Item) {
+	s.top = newNode(item, s.top)
+	s.n++
 }
 
-func (s *Stack[T]) Pop() T {
+func (s *Stack) Pop() Item {
 	if s.IsEmpty() {
 		panic("stack is empty")
 	}
 	// remove item from top of stack
-	val := s.top.val
+	item := s.top.item
 	s.top = s.top.next
-	s.len--
-	return val
+	s.n--
+	return item
 }
 
-func (s *Stack[T]) Peek() T {
+func (s *Stack) Peek() Item {
 	if s.IsEmpty() {
 		panic("stack is empty")
 	}
-	return s.top.val
+	return s.top.item
 
 }
 
-func (s *Stack[T]) Iterator() []T {
-	items := make([]T, s.len)
+func (s *Stack) Iterator() Iterator {
+	items := make([]interface{}, s.n)
 
 	i := 0
 	cur := s.top
-	for i < s.len {
-		items[i] = cur.val
+	for i < s.n {
+		items[i] = cur.item
 		cur = cur.next
 		i++
 	}
-	return items
+	return Iterator(items)
+}
+
+func (s *Stack) String() string {
+	var ss []string
+
+	for _, v := range s.Iterator() {
+		ss = append(ss, fmt.Sprint(v))
+	}
+
+	return "[" + strings.Join(ss, ", ") + "]"
 }

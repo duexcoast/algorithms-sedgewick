@@ -56,3 +56,20 @@ func partition(x Sortable, lo, hi int) int {
 	// return index of partition element in its correct location
 	return j
 }
+
+type Quick struct{}
+
+func NewQuick() Sorter {
+	return Quick{}
+}
+
+// Implements Sorter
+func (s Quick) SortInts(x []int) {
+	Quicksort(IntSortSlice(x))
+}
+func (s Quick) SortFloat64s(x []float64) {
+	Quicksort(Float64SortSlice(x))
+}
+func (s Quick) SortStrings(x []string) {
+	Quicksort(StringSortSlice(x))
+}

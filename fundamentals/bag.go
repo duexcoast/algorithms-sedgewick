@@ -1,46 +1,38 @@
 package fundamentals
 
-type Bag[T any] struct {
-	top *node[T]
-	len int
+type Bag struct {
+	top *Node
+	n   int
 }
 
-func NewBag[T any]() *Bag[T] {
-	return &Bag[T]{}
+func NewBag() *Bag {
+	return &Bag{}
 }
 
-func (b *Bag[T]) IsEmpty() bool {
+func (b *Bag) IsEmpty() bool {
 	return b.top == nil
 }
 
-func (b *Bag[T]) Size() int {
-	return b.len
+func (b *Bag) Size() int {
+	return b.n
 }
 
-func (b *Bag[T]) Add(val T) {
+func (b *Bag) Add(item Item) {
 	oldtop := b.top
-	b.top = newNode(val)
+	b.top = newNode(item, b.top)
 	b.top.next = oldtop
-	b.len++
+	b.n++
 }
 
-func (b *Bag[T]) Peek() T {
-	if b.IsEmpty() {
-		panic("bag is empty")
-	}
-	return b.top.val
-
-}
-
-func (b *Bag[T]) Iterator() []T {
-	items := make([]T, b.len)
+func (b *Bag) Iterator() Iterator {
+	items := make([]interface{}, b.n)
 
 	i := 0
 	cur := b.top
-	for i < b.len {
-		items[i] = cur.val
+	for i < b.n {
+		items[i] = cur.item
 		cur = cur.next
 		i++
 	}
-	return items
+	return Iterator(items)
 }
