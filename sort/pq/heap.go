@@ -8,14 +8,6 @@ type Interface interface {
 	Pop() any   // remove and return element Len() - 1
 }
 
-// {10, 3, 8, 9, 4}
-// h = { {10, 0}, {3, 1}, {8, 2}, {9, 4} }
-// a call to heap.Init takes in h
-// n = 4
-// The first iteration of the for loop starts with
-// i == 4/2 - 1 == 1, and continues, decrementing i, while i >= 0
-// we call down (sink)
-
 // Init establishes the heap invariants required by the other routines in this package.
 // Init is idempotent with respect to the heap invariants and may be called
 // whenever the heap invariants have been invalidated.
